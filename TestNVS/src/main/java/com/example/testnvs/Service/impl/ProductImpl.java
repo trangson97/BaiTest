@@ -23,11 +23,11 @@ public class ProductImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public DataResponse<CustomPage> findAll(int pageNumber, int pageSize) {
+    public DataResponse<CustomPage> findAll(String name,int pageNumber, int pageSize) {
         DataResponse<CustomPage> rs = new DataResponse<>(ResponseStatusCode.OK);
         try {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("createdAt").ascending());
-            Page<ProductEntity> page = productRepository.findAll(pageable);
+            Page<ProductEntity> page = productRepository.findAllByNameContaining(name,pageable);
             CustomPage customPage = new CustomPage(page);
             rs.setData(customPage);
         } catch (Exception e) {

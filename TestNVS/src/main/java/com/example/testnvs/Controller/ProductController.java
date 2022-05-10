@@ -15,9 +15,10 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public DataResponse<CustomPage> findAll(@RequestParam(name = "pageNumber", defaultValue = "10") int pageNumber,
-                                            @RequestParam(name = "pageSize", defaultValue = "0") int pageSize) {
-        return productService.findAll(pageNumber, pageSize);
+    public DataResponse<CustomPage> findAllByName(@RequestParam(name = "name",required = false) String name,
+                                            @RequestParam(name = "pageNumber", defaultValue = "0") int pageNumber,
+                                            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+        return productService.findAll(name, pageNumber, pageSize);
     }
 
     @PostMapping("")
